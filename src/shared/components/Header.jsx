@@ -3,7 +3,7 @@ import styles from "./header.module.css";
 
 export const Header = ( { secondsRemaining } ) => {
     return (
-        <header>
+        <header className={ styles.header }>
             <h1>The Quizzer</h1>
             <Timer secondsRemaining={ secondsRemaining } />
         </header>

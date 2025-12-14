@@ -3,22 +3,28 @@ import styles from "./questionScreen.module.css";
 
 const classes = [styles.shineBtn, styles.fadeIn].filter( Boolean ).join( " " );
 
-export const QuestionScreen = ( { question, questionsLength, currentQuestion, dispatch, answer, points } ) => {
+export const QuestionScreen = ( { question, questionsLength, currentQuestion, onReset, onAnswer, onNext, onFinish, answer, points } ) => {
+    const isLastQuestion = currentQuestion + 1 >= questionsLength;
+    const handleNextStep = () => {
+        if ( isLastQuestion ) {
+            onFinish();
+            return;
+        }
 
-    console.log( 'points', points );
+        onNext();
+    };
 
     return (
         <>
             <h3>{ question.question }</h3>
 
-            { <Options question={ question } dispatch={ dispatch } answer={ answer } /> }
+            { <Options question={ question } onAnswer={ onAnswer } answer={ answer } /> }
             <div className={ styles.btnRow }>
-                <button className={ classes } onClick={ () => dispatch( { type: 'resetQuiz' } ) }>Reset Quiz</button>
+                <button className={ classes } onClick={ onReset }>Reset Quiz</button>
                 <p>{ currentQuestion + 1 } / { questionsLength }</p>
-                { currentQuestion + 1 >= questionsLength
-                    ? <button className={ classes } disabled={ answer === null } onClick={ () => dispatch( { type: 'finishQuiz' } ) }>Finish</button>
-                    : <button className={ classes } disabled={ answer === null } onClick={ () => dispatch( { type: 'nextQuestion' } ) }>Next <span>→</span></button>
-                }
+                <button className={ classes } disabled={ answer === null } onClick={ handleNextStep }>
+                    { isLastQuestion ? "Finish" : <>Next <span>→</span></> }
+                </button>
             </div>
         </>
     );

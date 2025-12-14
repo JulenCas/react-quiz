@@ -1,10 +1,9 @@
 import styles from "./options.module.css";
 
-export const Options = ( { question, dispatch, answer } ) => {
+export const Options = ( { question, onAnswer, answer } ) => {
 
     const handleAnswerQuestion = ( index, isCorrect ) => {
-        dispatch( { type: "answerQuestion", payload: index } );
-        dispatch( { type: "addScore", payload: isCorrect } );
+        onAnswer( index, isCorrect );
     };
 
     return (
