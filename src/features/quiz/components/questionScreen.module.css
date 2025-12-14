@@ -1,0 +1,103 @@
+.btnRow {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    height: 45px;
+}
+
+.shineBtn:disabled,
+.shineBtn:disabled:hover {
+    color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.nextQuestionBtn:hover {
+    background-color: #2980b9;
+}
+
+.nextQuestionBtn span {
+    margin-left: 18px;
+}
+
+.shineBtn {
+    position: relative;
+    border-radius: 100px;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.shineBtn span {
+    display: inline-block;
+    transition: .3s;
+}
+
+.shineBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 15px rgb(0, 0, 0, .3);
+}
+
+.shineBtn:hover span {
+    transform: translateX(8px);
+}
+
+.shineBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -35%;
+    height: 2px;
+    width: 35%;
+    opacity: 1;
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 0))100%;
+    filter: blur(.2px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, .55);
+}
+
+.shineBtn::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -35%;
+    height: 2px;
+    width: 35%;
+    opacity: 1;
+    background: linear-gradient(to left,
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 0))100%;
+    filter: blur(.2px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, .55);
+}
+
+.shineBtn:hover::before {
+    opacity: 1;
+    animation: topShine .55s ease forwards;
+}
+
+.shineBtn:hover::after {
+    opacity: 1;
+    animation: bottomShine .55s ease forwards;
+}
+
+@keyframes topShine {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-380%);
+    }
+}
+
+@keyframes bottomShine {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(380%);
+    }
+}
